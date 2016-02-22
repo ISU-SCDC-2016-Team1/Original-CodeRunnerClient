@@ -1,5 +1,5 @@
 require './configurator'
 
-config = Configurator.new
+@config = Configurator.new
 
-require './coderunner.conf'
+load './coderunner.conf'
