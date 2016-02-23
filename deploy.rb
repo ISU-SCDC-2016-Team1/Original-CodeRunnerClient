@@ -1,6 +1,6 @@
 require './util.rb'
 
-def deploy project, runner
+def deploy project, runner, mode = :normal
   user = get_user
   identity = get_identity
   proj_url = get_project_url project
@@ -9,9 +9,9 @@ def deploy project, runner
 
   forward_identity runner
 
-  ssh "mkdir deploy"
+  ssh "mkdir deploy", mode
 
-  ssh "cd deploy && git clone #{proj_url}"
+  ssh "cd deploy && git clone #{proj_url}", mode
 
   delete_forwarded_identity
 end

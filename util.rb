@@ -33,9 +33,17 @@ def set_ssh_command cmd
 end
 
 def ssh cmd, option = :normal
+  cr_stdout = "~/deploy/stdout"
+  cr_stderr = "~/deploy/stderr"
+  cr_stdin = "~/deploy/stdin"
+
+  redir_snippet = "> #{cr_stdout} 2> #{cr_stderr} < #{cr_stdin}"
+
+  ssh "touch ~/deploy/stdin" if option == :redirect
+
   cmd = @ssh_cmd + "'" + cmd + "'" if option == :normal
-  cmd = @ssh_cmd + "'" + cmd + " > ~/cr_stdout 2> ~/cr_stderr" if option == :redirect
-  cmd = @ssh_cmd + "'" + cmd + " > /dev/null 2> /dev/null" if option == :redirect
+  cmd = @ssh_cmd + "'" + cmd + " #{redir_snippet}'"  if option == :redirect
+  cmd = @ssh_cmd + "'" + cmd + " > /dev/null 2> /dev/null'" if option == :silent
 
   if fork
     Process.wait
