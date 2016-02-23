@@ -36,7 +36,7 @@ def ssh cmd, option = :normal
   cmd = @ssh_cmd + "'" + cmd + "'" if option == :normal
   cmd = @ssh_cmd + "'" + cmd + " > ~/cr_stdout 2> ~/cr_stderr" if option == :redirect
   cmd = @ssh_cmd + "'" + cmd + " > /dev/null 2> /dev/null" if option == :redirect
-  
+
   if fork
     Process.wait
   else
@@ -45,7 +45,7 @@ def ssh cmd, option = :normal
 end
 
 def forward_identity runner
-  cmd = "scp #{get_identity} #{get_user}@#{runner}:.ssh/id_rsa"
+  cmd = "scp -i #{get_identity} #{get_identity} #{get_user}@#{runner}:.ssh/id_rsa"
 
   if fork
     Process.wait
