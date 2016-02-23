@@ -15,3 +15,9 @@ def deploy project, runner, mode = :normal
 
   delete_forwarded_identity
 end
+
+def clear project, runner
+  set_ssh_command "ssh -i #{get_identity} #{get_user}@#{runner} "
+
+  ssh "cd deploy & rm -rf #{project}"
+end

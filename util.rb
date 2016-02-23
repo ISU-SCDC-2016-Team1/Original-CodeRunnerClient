@@ -65,3 +65,7 @@ end
 def delete_forwarded_identity
   ssh "mv .ssh/id_rsa /tmp/id_to_be_deleted"
 end
+
+def default_ssh_command runner
+  set_ssh_command "ssh -i #{get_identity} #{get_user}@#{runner} "
+end
