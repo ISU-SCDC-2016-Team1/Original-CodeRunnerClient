@@ -1,7 +1,7 @@
-require './config.rb'
+require './config'
 
 def get_user
-  @config.username
+  ENV["USER"]
 end
 
 def get_keyfile
@@ -21,7 +21,7 @@ def get_gituser
 end
 
 def get_runner runner
-  @config.runners [runner.to_s]
+  @config.runners[runner.to_s]
 end
 
 def get_project_url project
