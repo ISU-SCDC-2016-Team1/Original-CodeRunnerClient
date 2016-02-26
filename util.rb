@@ -28,14 +28,15 @@ def get_project_url project
   "git@#{get_gitserver}:#{get_gituser}/#{project}.git"
 end
 
-def set_ssh_command cmd
+def set_ssh_command cmd, project = "default"
+  @project = project
   @ssh_cmd = cmd
 end
 
 def ssh cmd, option = :normal
-  cr_stdout = "~/deploy/stdout"
-  cr_stderr = "~/deploy/stderr"
-  cr_stdin = "~/deploy/stdin"
+  cr_stdout = "~/deploy/#{@project}-stdout"
+  cr_stderr = "~/deploy/#{@project}-stderr"
+  cr_stdin = "~/deploy/#{@project}-stdin"
 
   redir_snippet = "> #{cr_stdout} 2> #{cr_stderr} < #{cr_stdin}"
 
@@ -66,6 +67,6 @@ def delete_forwarded_identity
   ssh "mv .ssh/id_rsa /tmp/id_to_be_deleted"
 end
 
-def default_ssh_command runner
-  set_ssh_command "ssh -i #{get_identity} #{get_user}@#{runner} "
+def default_ssh_command runner, project
+  set_ssh_command "ssh -i #{@config.key} #{ENV["USER"]}@#{runner} ", project
 end

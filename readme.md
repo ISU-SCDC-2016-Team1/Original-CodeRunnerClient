@@ -50,3 +50,8 @@ CodeRunner requires two files to exist in the root of the project: a run configu
 and a build configuration. The files are named '.run' and '.build', respectively.
 Each file is a simple shell script, executed with the 'sh' utility when
 the 'build' and 'run' CodeRunner commands are used.
+
+# Deploying
+- Copy coderunner.conf to /etc/coderunner/coderunner.conf
+- Copy crconsole to somewhere in $PATH, preferably /usr/bin
+- Copy all .rb files to /usr/lib/coderunner/
