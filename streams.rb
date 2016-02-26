@@ -1,4 +1,4 @@
-require './util.rb'
+require 'util.rb'
 
 def get_stdin project, runner
   runner = get_runner runner

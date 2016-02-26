@@ -1,11 +1,11 @@
-require './config'
+require 'config'
 
 def get_user
   ENV["USER"]
 end
 
 def get_keyfile
-  @config.keyfile.gsub(/%username%/, get_user)
+  @config.keyfile.gsub(/%username%/, ENV["RUSER"])
 end
 
 def get_identity
@@ -17,7 +17,7 @@ def get_gitserver
 end
 
 def get_gituser
-  @config.gituser
+  @config.gituser.gsub(/%username%/, ENV["RUSER"])
 end
 
 def get_runner runner
@@ -29,18 +29,18 @@ def get_project_url project
 end
 
 def set_ssh_command cmd, project = "default"
-  @project = project
+  @ssh_project = project
   @ssh_cmd = cmd
 end
 
 def ssh cmd, option = :normal
-  cr_stdout = "~/deploy/#{@project}-stdout"
-  cr_stderr = "~/deploy/#{@project}-stderr"
-  cr_stdin = "~/deploy/#{@project}-stdin"
+  cr_stdout = "~/deploy/#{@ssh_project}-stdout"
+  cr_stderr = "~/deploy/#{@ssh_project}-stderr"
+  cr_stdin = "~/deploy/#{@ssh_project}-stdin"
 
   redir_snippet = "> #{cr_stdout} 2> #{cr_stderr} < #{cr_stdin}"
 
-  ssh "touch ~/deploy/stdin" if option == :redirect
+  ssh "touch #{cr_stdin}" if option == :redirect
 
   cmd = @ssh_cmd + "'" + cmd + "'" if option == :normal
   cmd = @ssh_cmd + "'" + cmd + " #{redir_snippet}'"  if option == :redirect

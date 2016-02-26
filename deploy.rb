@@ -1,4 +1,4 @@
-require './util.rb'
+require 'util.rb'
 
 def deploy_c project, runner, mode = :normal
   user = get_user

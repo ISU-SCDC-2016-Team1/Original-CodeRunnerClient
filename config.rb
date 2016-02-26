@@ -1,4 +1,4 @@
-require './configurator'
+require 'configurator'
 
 @config = Configurator.new
 

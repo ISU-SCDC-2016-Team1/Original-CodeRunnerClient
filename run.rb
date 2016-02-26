@@ -1,4 +1,4 @@
-require './util.rb'
+require 'util.rb'
 
 def run_c project, runner, mode = :normal
   runner = get_runner runner

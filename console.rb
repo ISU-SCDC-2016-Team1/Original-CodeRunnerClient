@@ -1,4 +1,4 @@
-require './core'
+require 'core'
 
 IRB.conf[:PROMPT][:CRCONSOLE] = {
   :AUTO_INDENT => true,
@@ -10,8 +10,8 @@ IRB.conf[:PROMPT][:CRCONSOLE] = {
 
 def print_prompt
   $stdout.write @project unless @project.nil?
-  $stdout.write "=>" unless @runner.nil? or @project.nil?
-  $stdout.write @runner unless @runner.nil?
+  $stdout.write " => " unless @runner.nil? or @project.nil?
+  $stdout.write @runner + " " unless @runner.nil?
 end
 
 print_prompt

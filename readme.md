@@ -41,9 +41,23 @@ The 'stderr' command does the same for standard error.
 
 ### Standard Input
 The 'stdin' command, without additional arguments, simply prints the 
-standard input that was provided to the run. Running a full stdin command 
-'stdin :<project> => :<runner>, <filename>' will send the local file 
+standard input that was provided to the run. Running the stdin command 
+'stdin "<filename>", :<project> => :<runner>' or 'stdin "filename"', if
+crconsole has remembered the current project and runner, will send the 
+local file 
 <filename> to the remote server and use it as standard in.
+
+To run the 'stdin' command long, form (ie. not using a remembered project
+and runner from a previous command), you must specify the filename as 'nil'
+(no quotes). For example,
+~~~
+stdin nil, :test => :runner1
+~~~
+is the same as
+~~~
+stdin
+~~~
+if the console remembers :test and :runner1 from previous commands.
 
 # Project Configuration
 CodeRunner requires two files to exist in the root of the project: a run configuration
@@ -55,3 +69,35 @@ the 'build' and 'run' CodeRunner commands are used.
 - Copy coderunner.conf to /etc/coderunner/coderunner.conf
 - Copy crconsole to somewhere in $PATH, preferably /usr/bin
 - Copy all .rb files to /usr/lib/coderunner/
+
+# Examples
+~~~
+crconsole
+# Deploy a project to a runner
+~> deploy :test1 => :runner1
+
+# Build the project on the runner
+# Note that after the first command, the promp
+# will change to represent the "remembered" parameters.
+test1 => runner1 ~> build
+# Equivalent to 'build :test1 => :runner1'
+
+# Run the project on the runner
+test1 => runner1 ~> run
+# Equivalent to 'run :test1 => :runner1'
+
+# Print the standard output then standard error of the run
+test1 => runner1 ~> stdout
+test1 => runner1 ~> stderr
+# These can also be specified long-form as
+# 'stdout :test1 => :runner1'
+
+# Upload a new file (stored locally as test-stdin.txt) 
+# to use as standard input
+test1 => runner1 ~> stdin "test-stdin.txt"
+# This is equivalent to long-form 'stdin "test-stdin.txt", :test1 => :runner1'
+
+# Print the standard input that is being used currently
+test1 => runner1 ~> stdin
+# This is equivalent to 'stdin nil, :test1 => :runner1'
+# Note the slightly different syntax.

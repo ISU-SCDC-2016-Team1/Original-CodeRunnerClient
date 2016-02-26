@@ -3,5 +3,6 @@
 # Set up ISEAGE proxy
 . /etc/globalconfig
 
-cd /usr/lib/coderunner
-irb -r './console.rb'
+export RUBYLIB=/usr/lib/coderunner
+
+irb -r 'console.rb'

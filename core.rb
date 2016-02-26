@@ -1,5 +1,5 @@
-require './deploy'
-require './build'
-require './run'
+require 'deploy'
+require 'build'
+require 'run'
 
-require './streams'
+require 'streams'
