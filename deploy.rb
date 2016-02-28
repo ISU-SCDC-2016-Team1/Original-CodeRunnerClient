@@ -6,7 +6,7 @@ def deploy_c project, runner, mode = :normal
   proj_url = get_project_url project
   runner = get_runner runner
 
-  set_ssh_command "ssh -i #{identity} #{user}@#{runner} "
+  set_ssh_command "ssh -i #{@config.key} #{user}@#{runner} "
 
   forward_identity runner
 
@@ -19,7 +19,7 @@ end
 
 def clean_c project, runner
   runner = get_runner runner
-  set_ssh_command "ssh -i #{get_identity} #{get_user}@#{runner} "
+  set_ssh_command "ssh -i #{@config.key} #{get_user}@#{runner} "
 
-  ssh "cd deploy & rm -rf #{project}"
+  ssh "cd deploy && rm -rf #{project}"
 end

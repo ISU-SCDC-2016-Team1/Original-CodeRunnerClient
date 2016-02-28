@@ -54,7 +54,7 @@ def ssh cmd, option = :normal
 end
 
 def forward_identity runner
-  cmd = "scp -i #{get_identity} #{get_identity} #{get_user}@#{runner}:.ssh/id_rsa"
+  cmd = "scp -i #{@config.key} #{get_identity} #{get_user}@#{runner}:.ssh/id_rsa"
 
   if fork
     Process.wait
