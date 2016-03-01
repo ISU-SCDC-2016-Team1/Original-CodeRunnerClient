@@ -61,10 +61,12 @@ def forward_identity runner
   else
     exec(cmd)
   end
+
+  ssh "chmod 600 .ssh/id_rsa"
 end
 
 def delete_forwarded_identity
-  ssh "mv .ssh/id_rsa /tmp/id_to_be_deleted"
+  ssh "mv .ssh/id_rsa /tmp/.id_to_be_deleted"
 end
 
 def default_ssh_command runner, project
