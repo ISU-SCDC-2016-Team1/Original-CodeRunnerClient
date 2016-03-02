@@ -48,7 +48,7 @@ local file
 <filename> to the remote server and use it as standard in.
 
 ~~~
-# Upload /tmp/my_stdin and set it as standard input
+# Upload /tmp/my_input and set it as standard input
 stdin "/tmp/my_input", :test1 => :runner1
 ~~~
 
