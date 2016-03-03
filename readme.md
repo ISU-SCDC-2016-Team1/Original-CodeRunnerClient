@@ -51,10 +51,15 @@ The 'stderr' command does the same for standard error.
 ### Standard Input
 The 'stdin' command, without additional arguments, simply prints the 
 standard input that was provided to the run. Running the stdin command 
-'stdin "<filename>", :<project> => :<runner>' or 'stdin "filename"', if
+'stdin "filename", :project => :runner' or 'stdin "filename"', if
 crconsole has remembered the current project and runner, will send the 
 local file 
 <filename> to the remote server and use it as standard in.
+
+~~~
+# Upload /tmp/my_input and set it as standard input
+stdin "/tmp/my_input", :test1 => :runner1
+~~~
 
 To run the 'stdin' command long, form (ie. not using a remembered project
 and runner from a previous command), you must specify the filename as 'nil'
