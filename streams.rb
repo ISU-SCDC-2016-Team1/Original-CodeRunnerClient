@@ -23,7 +23,7 @@ end
 
 def send_stdin project, runner, stdin_filename
   runner = get_runner runner
-  cmd = "scp -i #{get_identity} #{stdin_filename} #{get_user}@#{runner}:~/deploy/#{project}-stdin"
+  cmd = "scp -i #{@config.key} #{stdin_filename} #{get_user}@#{runner}:~/deploy/#{project}-stdin"
 
   if fork
     Process.wait

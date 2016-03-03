@@ -1,5 +1,14 @@
 # CodeRunner Framework
 
+## Note: SSH Keys
+
+CodeRunner depends on SSH keys provided by keyescrow. Before you can use
+CodeRunner to deploy projects to the runners, you must run
+~~~
+keyescrow get -t /tmp
+~~~
+to load your SSH keys.
+
 ## Functions
 CodeRunner supports the following functions
 
